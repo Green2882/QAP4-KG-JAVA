@@ -4,3 +4,10 @@ patientFirstName TEXT,
 patientLastName TEXT,
 patientDOB DATE
 );
+
+CREATE TABLE drugs(
+drugId SERIAL PRIMARY KEY,
+drugName TEXT,
+drug_cost DOUBLE PRECISION,
+dosage DOUBLE PRECISION
+);
