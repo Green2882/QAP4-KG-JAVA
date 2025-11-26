@@ -1,4 +1,6 @@
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -184,7 +186,7 @@ public class Demo {
     }
 
     // Method to read patients from database
-    public static void readDB() {
+    public static void readPatientDB() {
 
         ArrayList<Patient> patientList = new ArrayList<>();
         String query = "SELECT * FROM patients";
@@ -211,6 +213,55 @@ public class Demo {
 
         for (Patient p : patientList) {
             System.out.println(p);
+        }
+    }
+
+    // Method to write patient to text file
+    public static void writePatientFile() {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter patient ID: ");
+        String id = in.nextLine();
+
+        System.out.print("Enter patient first name: ");
+        String firstName = in.nextLine();
+
+        System.out.print("Enter patient last name: ");
+        String lastName = in.nextLine();
+
+        System.out.print("Enter patient date of birth (yyyy-mm-dd): ");
+        String dob = in.nextLine();
+
+        String line = id + "," + firstName + "," + lastName + "," + dob;
+
+        try {
+            FileWriter writer = new FileWriter("patients.txt", true);
+            writer.write(line + "\n");
+            writer.close();
+
+            System.out.println("Patient written to file successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Method to read patients from text file
+    public static void readPatientFile() {
+
+        try {
+            FileReader fr = new FileReader("patients.txt");
+            int i;
+
+            while ((i = fr.read()) != -1) {
+                System.out.print((char) i);
+            }
+
+            fr.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
