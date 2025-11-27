@@ -42,26 +42,21 @@ public class Demo {
 
                         case "A":
                             writePatientDB();
-                            System.out.println("Writing patient info to DB...");
                             break;
 
                         case "B":
                             readPatientDB();
-                            System.out.println("Reading patient info from DB...");
                             break;
 
                         case "C":
                             writePatientFile();
-                            System.out.println("Writing patient info to file...");
                             break;
 
                         case "D":
                             readPatientFile();
-                            System.out.println("Reading patient info from file...");
                             break;
 
                         default:
-                            System.out.println("Invalid patient menu choice.");
                             break;
                     }
                     break;
@@ -80,26 +75,21 @@ public class Demo {
                     switch (drugChoice) {
                         case "A":
                             writeDrugDB();
-                            System.out.println("Writing drug info to DB...");
                             break;
 
                         case "B":
                             readDrugDB();
-                            System.out.println("Reading drug info from DB...");
                             break;
 
                         case "C":
                             writeDrugFile();
-                            System.out.println("Writing drug info to file...");
                             break;
 
                         case "D":
                             readDrugFile();
-                            System.out.println("Reading drug info from file...");
                             break;
 
                         default:
-                            System.out.println("Invalid drug menu choice.");
                             break;
 
                     }
@@ -160,7 +150,7 @@ public class Demo {
                         PreparedStatement statement = con.prepareStatement(query);
                         statement.setString(1, patientFirstName);
                         statement.setString(2, patientLastName);
-                        statement.setString(3, patientDOB);
+                        statement.setDate(3, java.sql.Date.valueOf(patientDOB));
 
                         int rows = statement.executeUpdate();
                         System.out.println("Inserted: " + rows + " row(s) successfully");
