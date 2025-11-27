@@ -41,22 +41,22 @@ public class Demo {
                     switch (patientChoice) {
 
                         case "A":
-                            // writePatientDB();
+                            writePatientDB();
                             System.out.println("Writing patient info to DB...");
                             break;
 
                         case "B":
-                            // readPatientDB();
+                            readPatientDB();
                             System.out.println("Reading patient info from DB...");
                             break;
 
                         case "C":
-                            // writePatientFile();
+                            writePatientFile();
                             System.out.println("Writing patient info to file...");
                             break;
 
                         case "D":
-                            // readPatientFile();
+                            readPatientFile();
                             System.out.println("Reading patient info from file...");
                             break;
 
@@ -79,22 +79,22 @@ public class Demo {
 
                     switch (drugChoice) {
                         case "A":
-                            // writeDrugDB();
+                            writeDrugDB();
                             System.out.println("Writing drug info to DB...");
                             break;
 
                         case "B":
-                            // readDrugDB();
+                            readDrugDB();
                             System.out.println("Reading drug info from DB...");
                             break;
 
                         case "C":
-                            // writeDrugFile();
+                            writeDrugFile();
                             System.out.println("Writing drug info to file...");
                             break;
 
                         case "D":
-                            // readDrugFile();
+                            readDrugFile();
                             System.out.println("Reading drug info from file...");
                             break;
 
@@ -117,7 +117,7 @@ public class Demo {
     }
 
     // Method to write patient to database
-    public static void writePateintDB() {
+    public static void writePatientDB() {
 
         Scanner in = new Scanner(System.in);
 
@@ -199,10 +199,10 @@ public class Demo {
             while (res.next()) {
 
                 Patient temp = new Patient();
-                temp.setPatientId(res.getInt("PatientId"));
-                temp.setPatientFirstName(res.getString("patientFirstName"));
-                temp.setPatientLastName(res.getString("patientLastName"));
-                temp.setPatientDOB(res.getString("patientDOB"));
+                temp.setPatientId(res.getInt("patientid"));
+                temp.setPatientFirstName(res.getString("patientfirstname"));
+                temp.setPatientLastName(res.getString("patientlastname"));
+                temp.setPatientDOB(res.getString("patientdob"));
                 patientList.add(temp);
             }
             con.close();
@@ -267,7 +267,7 @@ public class Demo {
     }
 
     // Method to write drug to database
-    public static void writeDrugsDB() {
+    public static void writeDrugDB() {
 
         Scanner in = new Scanner(System.in);
 
@@ -352,9 +352,9 @@ public class Demo {
             while (res.next()) {
 
                 Drug temp = new Drug();
-                temp.setDrugId(res.getInt("drugId"));
-                temp.setDrugName(res.getString("drugName"));
-                temp.setDrugCost(res.getDouble("drugCost"));
+                temp.setDrugId(res.getInt("drugid"));
+                temp.setDrugName(res.getString("drugname"));
+                temp.setDrugCost(res.getDouble("drugcost"));
                 temp.setDosage(res.getDouble("dosage"));
                 drugList.add(temp);
             }
@@ -367,6 +367,58 @@ public class Demo {
 
         for (Drug d : drugList) {
             System.out.println(d);
+        }
+    }
+
+    // Method to write drug to a text file
+    public static void writeDrugFile() {
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter drug ID: ");
+        String id = in.nextLine();
+
+        System.out.print("Enter drug name: ");
+        String drugName = in.nextLine();
+
+        System.out.print("Enter drug cost: ");
+        double drugCost = in.nextDouble();
+        in.nextLine();
+
+        System.out.print("Enter drug dosage: ");
+        double dosage = in.nextDouble();
+        in.nextLine();
+
+        String line = id + "," + drugName + "," + drugCost + "," + dosage;
+
+        try {
+            FileWriter writer = new FileWriter("drugs.txt", true);
+            writer.write(line + "\n");
+            writer.close();
+
+            System.out.println("Drug written to file successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // Method to read drugs from text file
+    public static void readDrugFile() {
+
+        try {
+            FileReader fr = new FileReader("drugs.txt");
+            int i;
+
+            while ((i = fr.read()) != -1) {
+                System.out.print((char) i);
+            }
+
+            fr.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
