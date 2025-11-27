@@ -8,6 +8,6 @@ patientDOB DATE
 CREATE TABLE drugs(
 drugId SERIAL PRIMARY KEY,
 drugName TEXT,
-drug_cost DOUBLE PRECISION,
+drugCost DOUBLE PRECISION,
 dosage DOUBLE PRECISION
 );
